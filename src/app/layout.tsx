@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { LayoutDashboard, Wallet, ArrowRightLeft, Settings, Bell, Search } from 'lucide-react';
 import clsx from 'clsx';
+import Chatbox from '@/components/Chatbox';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -68,6 +69,8 @@ export default function RootLayout({
             {children}
           </div>
         </main>
+        
+        <Chatbox />
 
       </body>
     </html>
