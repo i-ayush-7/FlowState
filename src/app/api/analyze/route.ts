@@ -15,38 +15,40 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'businessId is required' }, { status: 400 });
     }
 
-    if (!supabaseUrl || !supabaseKey) {
-      return NextResponse.json({ error: 'Supabase credentials missing' }, { status: 500 });
+    let businessContext = null;
+
+    if (supabaseUrl && supabaseKey) {
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      // 1. Fetch Business Data
+      const { data: business } = await supabase
+        .from('businesses')
+        .select('*')
+        .eq('id', businessId)
+        .single();
+
+      // 2. Fetch Pending Invoices
+      const { data: invoices } = await supabase
+        .from('invoices')
+        .select('*')
+        .eq('business_id', businessId)
+        .eq('status', 'unpaid');
+
+      // 3. Fetch Pending Transactions
+      const { data: transactions } = await supabase
+        .from('transactions')
+        .select('*')
+        .eq('business_id', businessId)
+        .eq('status', 'pending');
+
+      businessContext = {
+        business,
+        invoices,
+        transactions
+      };
+    } else {
+      console.warn("Supabase credentials missing. Bypassing database fetch for prototype mock mode.");
     }
-
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
-    // 1. Fetch Business Data
-    const { data: business } = await supabase
-      .from('businesses')
-      .select('*')
-      .eq('id', businessId)
-      .single();
-
-    // 2. Fetch Pending Invoices
-    const { data: invoices } = await supabase
-      .from('invoices')
-      .select('*')
-      .eq('business_id', businessId)
-      .eq('status', 'unpaid');
-
-    // 3. Fetch Pending Transactions
-    const { data: transactions } = await supabase
-      .from('transactions')
-      .select('*')
-      .eq('business_id', businessId)
-      .eq('status', 'pending');
-
-    const businessContext = {
-      business,
-      invoices,
-      transactions
-    };
 
     // 4. Send to n8n Webhook for AI Analysis 
     // (If webhook is not set up, we return the mock AI response for prototype continuity)
