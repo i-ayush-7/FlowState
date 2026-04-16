@@ -36,4 +36,4 @@ CREATE TABLE transactions (
 
 -- Insert a Mock Business directly for testing
 INSERT INTO businesses (company_name, current_balance) 
-VALUES ('Acme Design Studio', 45000.00);
+VALUES ('Admin', 45000.00);

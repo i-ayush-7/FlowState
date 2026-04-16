@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     } else {
       // Fallback mock context if Supabase is bypassed
       businessContext = {
-        business: { company_name: "Acme Design Studio", current_balance: 125000 },
+        business: { company_name: "Admin", current_balance: 125000 },
         invoices: [{ invoice_number: 'INV-2046', client_name: 'Wayne Enterprises', amount: 48000.00, due_date: 'In 55 days', status: 'unpaid' }],
         transactions: [
              { description: 'Quarterly Tax Payment', amount: -30000.00, due: 'In 45 days' },

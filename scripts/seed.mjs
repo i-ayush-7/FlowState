@@ -27,7 +27,7 @@ async function seedData() {
     const { data: businessData, error: businessError } = await supabase
       .from('businesses')
       .insert({
-        company_name: 'Acme Design Studio',
+        company_name: 'Admin',
         current_balance: 45000.00
       })
       .select('id')
@@ -35,7 +35,7 @@ async function seedData() {
 
     if (businessError) throw businessError;
     const businessId = businessData.id;
-    console.log(`✅ Created Business: Acme Design Studio (${businessId})`);
+    console.log(`✅ Created Business: Admin (${businessId})`);
 
     // Helper to get future dates
     const getFutureDate = (days) => {
