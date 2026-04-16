@@ -9,25 +9,27 @@ let supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 let supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 let apiKey = process.env.GEMINI_API_KEY || '';
 
-// Fallback to read directly from .env.local if the server hasn't been restarted recently
-try {
-  if (!apiKey || !supabaseUrl) {
-    const envPath = path.resolve(process.cwd(), '.env.local');
-    if (fs.existsSync(envPath)) {
-      const envContent = fs.readFileSync(envPath, 'utf8');
-      envContent.split('\n').forEach(line => {
-        if (line.startsWith('GEMINI_API_KEY=')) apiKey = line.split('=')[1].replace(/"/g, '').trim();
-        if (line.startsWith('NEXT_PUBLIC_SUPABASE_URL=')) supabaseUrl = line.split('=')[1].replace(/"/g, '').trim();
-        if (line.startsWith('NEXT_PUBLIC_SUPABASE_ANON_KEY=')) supabaseKey = line.split('=')[1].replace(/"/g, '').trim();
-      });
-    }
-  }
-} catch (e) {}
-
-// Initialize GenAI
-const ai = new GoogleGenAI({ apiKey });
+// The dynamic read happens inside POST to ensure fresh grabs
 
 export async function POST(request: Request) {
+  // Fallback to read directly from .env.local if the server hasn't been restarted recently
+  try {
+    if (!apiKey || !supabaseUrl) {
+      const envPath = path.resolve(process.cwd(), '.env.local');
+      if (fs.existsSync(envPath)) {
+        const envContent = fs.readFileSync(envPath, 'utf8');
+        envContent.split('\n').forEach(line => {
+          if (line.startsWith('GEMINI_API_KEY=')) apiKey = line.split('=')[1].replace(/"/g, '').trim();
+          if (line.startsWith('NEXT_PUBLIC_SUPABASE_URL=')) supabaseUrl = line.split('=')[1].replace(/"/g, '').trim();
+          if (line.startsWith('NEXT_PUBLIC_SUPABASE_ANON_KEY=')) supabaseKey = line.split('=')[1].replace(/"/g, '').trim();
+        });
+      }
+    }
+  } catch (e) {}
+
+  // Initialize GenAI inside the handler to ensure it captures the dynamically loaded API key
+  const ai = new GoogleGenAI({ apiKey });
+
   try {
     const { message, businessId = 'mock-uuid-for-demo' } = await request.json();
 
@@ -42,7 +44,7 @@ export async function POST(request: Request) {
     let businessContext = null;
 
     // Fetch from Supabase exactly like our main logic
-    if (supabaseUrl && supabaseKey) {
+    if (supabaseUrl && supabaseKey && businessId !== 'mock-uuid-for-demo') {
       const supabase = createClient(supabaseUrl, supabaseKey);
       
       const { data: business } = await supabase.from('businesses').select('*').eq('id', businessId).single();
