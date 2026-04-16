@@ -2,9 +2,27 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { GoogleGenAI } from '@google/genai';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const apiKey = process.env.GEMINI_API_KEY || '';
+import fs from 'fs';
+import path from 'path';
+
+let supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+let supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+let apiKey = process.env.GEMINI_API_KEY || '';
+
+// Fallback to read directly from .env.local if the server hasn't been restarted recently
+try {
+  if (!apiKey || !supabaseUrl) {
+    const envPath = path.resolve(process.cwd(), '.env.local');
+    if (fs.existsSync(envPath)) {
+      const envContent = fs.readFileSync(envPath, 'utf8');
+      envContent.split('\n').forEach(line => {
+        if (line.startsWith('GEMINI_API_KEY=')) apiKey = line.split('=')[1].replace(/"/g, '').trim();
+        if (line.startsWith('NEXT_PUBLIC_SUPABASE_URL=')) supabaseUrl = line.split('=')[1].replace(/"/g, '').trim();
+        if (line.startsWith('NEXT_PUBLIC_SUPABASE_ANON_KEY=')) supabaseKey = line.split('=')[1].replace(/"/g, '').trim();
+      });
+    }
+  }
+} catch (e) {}
 
 // Initialize GenAI
 const ai = new GoogleGenAI({ apiKey });
