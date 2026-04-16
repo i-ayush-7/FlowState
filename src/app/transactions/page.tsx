@@ -31,7 +31,7 @@ export default function TransactionsPage() {
         </div>
       </div>
 
-      <div className="bg-zinc-900/50 border border-zinc-800/80 rounded-2xl overflow-hidden backdrop-blur-sm">
+      <div className="bg-black/30 border border-zinc-700/40 shadow-2xl rounded-2xl overflow-hidden backdrop-blur-3xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>

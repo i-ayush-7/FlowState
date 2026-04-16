@@ -112,7 +112,7 @@ export default function Dashboard() {
         
         {/* Dynamic Insight Card */}
         {isResolved ? (
-           <div className="bg-emerald-950/30 border border-emerald-500/30 p-5 rounded-2xl relative overflow-hidden group">
+           <div className="bg-emerald-950/20 backdrop-blur-3xl border border-emerald-500/30 shadow-2xl shadow-emerald-900/20 p-5 rounded-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-3xl rounded-full -mr-16 -mt-16" />
             <h3 className="text-emerald-400 text-sm font-medium flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-500" />
@@ -122,7 +122,7 @@ export default function Dashboard() {
             <p className="text-emerald-300/80 text-sm mt-2 font-medium">Gap resolved completely.</p>
           </div>
         ) : aiData?.prediction?.dry_spell_detected ? (
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-red-500/30 p-5 rounded-2xl relative overflow-hidden group animate-in fade-in zoom-in duration-500">
+          <div className="bg-gradient-to-br from-zinc-900/60 to-zinc-950/60 backdrop-blur-3xl border border-red-500/30 shadow-2xl shadow-red-900/20 p-5 rounded-2xl relative overflow-hidden group animate-in fade-in zoom-in duration-500">
             <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 blur-3xl rounded-full -mr-16 -mt-16 transition-all group-hover:bg-red-500/20" />
             <h3 className="text-zinc-400 text-sm font-medium flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-red-500 animate-pulse" />
@@ -132,7 +132,7 @@ export default function Dashboard() {
             <p className="text-red-400 text-sm mt-2 font-medium">In approx. 45 days. See chart.</p>
           </div>
         ) : (
-          <div className="bg-zinc-900 border border-zinc-800 p-5 rounded-2xl flex flex-col justify-center items-center text-center opacity-70">
+          <div className="bg-black/30 backdrop-blur-3xl border border-zinc-800/60 shadow-2xl p-5 rounded-2xl flex flex-col justify-center items-center text-center opacity-70">
             <BrainCircuit className="w-8 h-8 text-zinc-600 mb-2" />
             <p className="text-sm font-medium text-zinc-400">Agent On Standby</p>
           </div>
@@ -141,7 +141,7 @@ export default function Dashboard() {
 
       {/* AI AI Resolutions UI (Visible only when aiData is present and not yet resolved) */}
       {aiData && !isResolved && (
-        <div className="bg-indigo-950/20 border border-indigo-500/30 rounded-2xl p-6 animate-in slide-in-from-top-4 duration-500 fade-in">
+        <div className="bg-indigo-950/30 backdrop-blur-3xl border border-indigo-500/30 shadow-2xl shadow-indigo-900/20 rounded-2xl p-6 animate-in slide-in-from-top-4 duration-500 fade-in">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 bg-indigo-500/20 rounded-lg">
               <BrainCircuit className="w-5 h-5 text-indigo-400" />
@@ -154,7 +154,7 @@ export default function Dashboard() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
             {aiData.resolutions.map((res: any) => (
-              <div key={res.id} className="bg-zinc-900 border border-zinc-700/50 p-5 rounded-xl hover:border-indigo-500/50 transition-colors group">
+              <div key={res.id} className="bg-black/40 backdrop-blur-xl border border-zinc-700/50 shadow-xl p-5 rounded-xl hover:border-indigo-500/50 hover:shadow-indigo-500/10 transition-all duration-300 group">
                 <div className="flex justify-between items-start mb-2">
                   <span className="px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-300 bg-indigo-500/10 rounded-md">
                     {res.type}
@@ -181,7 +181,7 @@ export default function Dashboard() {
       )}
 
       {/* 60-Day Cash Flow Chart */}
-      <div className="bg-zinc-900/50 border border-zinc-800/80 rounded-2xl p-6 backdrop-blur-sm relative overflow-hidden transition-all duration-700">
+      <div className="bg-black/30 border border-zinc-800/60 shadow-2xl rounded-2xl p-6 backdrop-blur-3xl relative overflow-hidden transition-all duration-700">
         <div className="flex justify-between items-center mb-6 relative z-10">
           <div>
             <h2 className="text-lg font-semibold text-white">60-Day Liquidity Projection</h2>
@@ -244,7 +244,7 @@ export default function Dashboard() {
 
 function KPICard({ title, amount, trend, trendUp, subtitle }: { title: string; amount: string; trend: string; trendUp: boolean; subtitle: string }) {
   return (
-    <div className="bg-zinc-900 border border-zinc-800 p-5 rounded-2xl transition-all duration-500 hover:border-zinc-700">
+    <div className="bg-black/30 backdrop-blur-3xl border border-zinc-700/40 shadow-2xl rounded-2xl p-5 transition-all duration-500 hover:border-zinc-500/50 hover:bg-black/40">
       <h3 className="text-zinc-400 text-sm font-medium">{title}</h3>
       <p className="text-2xl font-semibold text-white mt-2">{amount}</p>
       <div className="flex items-center gap-2 mt-2">

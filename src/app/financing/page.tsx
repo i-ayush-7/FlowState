@@ -24,7 +24,7 @@ export default function FinancingPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Active Capital */}
-        <div className="bg-gradient-to-br from-indigo-950/40 to-zinc-950 border border-indigo-500/30 p-6 rounded-2xl relative overflow-hidden">
+        <div className="bg-gradient-to-br from-indigo-950/40 to-black/40 backdrop-blur-3xl shadow-2xl shadow-indigo-900/20 border border-indigo-500/30 p-6 rounded-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 blur-3xl rounded-full -mr-20 -mt-20"></div>
           <div className="flex items-center gap-3 mb-6 relative z-10">
             <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
@@ -46,7 +46,7 @@ export default function FinancingPage() {
         </div>
 
         {/* Factoring Widget */}
-        <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between">
+        <div className="bg-black/30 backdrop-blur-3xl border border-zinc-700/40 shadow-2xl p-6 rounded-2xl flex flex-col justify-between">
            <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
@@ -71,7 +71,7 @@ export default function FinancingPage() {
         <h2 className="text-xl font-semibold text-white mb-4">Marketplace Offers</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {mockOffers.map(offer => (
-             <div key={offer.id} className="bg-zinc-900/40 border border-zinc-800/80 rounded-xl p-5 hover:border-zinc-700 transition">
+             <div key={offer.id} className="bg-black/40 backdrop-blur-xl shadow-xl border border-zinc-700/50 rounded-xl p-5 hover:border-indigo-500/50 transition-all duration-300">
                <div className="flex justify-between items-start mb-4">
                   <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400 bg-indigo-400/10 px-2.5 py-1 rounded-md">
                     {offer.type}

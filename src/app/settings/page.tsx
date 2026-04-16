@@ -26,7 +26,7 @@ export default function SettingsPage() {
         <div className="md:col-span-3 space-y-8">
           
           {/* Company Profile Section */}
-          <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6">
+          <div className="bg-black/30 backdrop-blur-3xl border border-zinc-700/50 shadow-2xl rounded-2xl p-6 transition-all duration-500">
             <h2 className="text-lg font-semibold text-white mb-6">Company Profile</h2>
             <div className="space-y-5">
               <div>
@@ -34,7 +34,7 @@ export default function SettingsPage() {
                 <input 
                   type="text" 
                   defaultValue="Admin" 
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500/50 transition" 
+                  className="w-full bg-black/40 border border-zinc-700/40 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500/50 transition backdrop-blur-md" 
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -43,12 +43,12 @@ export default function SettingsPage() {
                   <input 
                     type="text" 
                     defaultValue="**-*******" 
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500/50 transition font-mono" 
+                    className="w-full bg-black/40 border border-zinc-700/40 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500/50 transition font-mono backdrop-blur-md" 
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-zinc-400 mb-1.5">Industry</label>
-                  <select className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500/50 transition appearance-none">
+                  <select className="w-full bg-black/40 border border-zinc-700/40 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500/50 transition appearance-none backdrop-blur-md">
                     <option>Creative Agency</option>
                     <option>SaaS</option>
                     <option>E-Commerce</option>
@@ -64,11 +64,11 @@ export default function SettingsPage() {
           </div>
 
           {/* Integrations Section */}
-          <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6">
+          <div className="bg-black/30 backdrop-blur-3xl border border-zinc-700/50 shadow-2xl rounded-2xl p-6 transition-all duration-500">
             <h2 className="text-lg font-semibold text-white mb-6">Connected Data Sources</h2>
             <div className="space-y-4">
                {/* Plaid Connection */}
-               <div className="flex items-center justify-between p-4 bg-zinc-950 border border-zinc-800/80 rounded-xl">
+               <div className="flex items-center justify-between p-4 bg-black/40 backdrop-blur-md border border-zinc-700/40 rounded-xl hover:border-zinc-500/30 transition-all">
                  <div className="flex items-center gap-4">
                    <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center p-2">
                      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Plaid_logo.svg" alt="Plaid" className="w-full opacity-90" />
@@ -85,7 +85,7 @@ export default function SettingsPage() {
                </div>
 
                {/* QuickBooks Connection */}
-               <div className="flex items-center justify-between p-4 bg-zinc-950 border border-zinc-800/80 rounded-xl">
+               <div className="flex items-center justify-between p-4 bg-black/40 backdrop-blur-md border border-zinc-700/40 rounded-xl hover:border-zinc-500/30 transition-all">
                  <div className="flex items-center gap-4">
                    <div className="w-10 h-10 rounded-lg bg-[#2CA01C] flex items-center justify-center p-1.5">
                      <svg viewBox="0 0 100 100" fill="white" className="w-full"><path d="M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 85C30.7 85 15 69.3 15 50S30.7 15 50 15s35 15 35 35-15.7 35-35 35z"/></svg>
